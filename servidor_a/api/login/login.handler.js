@@ -3,11 +3,11 @@ function login(data, listaUsuarios) {
     for (let usuario of listaUsuarios) {
         if (usuario.name == data.name && usuario.password == data.password) {
             return true;
-        }
-    }
+        };
+    };
     return false;
-}
+};
 
 module.exports = {
     login
-}
+};

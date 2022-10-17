@@ -5,7 +5,7 @@ const tabelaUsers = "Users";
 async function cadastrar(data) {
     console.log("data: ", data);
     return await crud.save(tabelaUsers, null, data);
-}
+};
 
 async function retonarListaUsuarios() {
     return crud.get(tabelaUsers);
@@ -14,4 +14,4 @@ async function retonarListaUsuarios() {
 module.exports = {
     cadastrar,
     retonarListaUsuarios
-}
+};

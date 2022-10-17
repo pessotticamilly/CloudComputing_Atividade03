@@ -1,7 +1,12 @@
 {
-  "name": "servidor_a",
+  "dependencies": {
+    "express": "^4.18.2",
+    "firebase": "^9.12.1",
+    "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.20"
+  },
+  "name": "servidor_b",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -11,10 +16,5 @@
   "keywords": [],
   "author": "Camilly de Souza Pessotti",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
-    "firebase": "^9.12.1",
-    "node-fetch": "^2.6.7",
-    "nodemon": "^2.0.20"
-  }
+  "description": ""
 }
