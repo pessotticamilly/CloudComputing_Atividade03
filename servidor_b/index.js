@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`App listening at http://origem:${port}`);
+    console.log(`App listening at http://localhost:${port}`);
 });
 
 //docker run -d -p 8080:3000 pessotticamilly/atividade_tres_servidor_a:1.0.0
@@ -21,5 +21,5 @@ app.listen(port, () => {
 
 //docker network ls
 //docker network create --driver bridge my_network
-//docker run -d -p 8080:3000 --name destino --network my_network
-//docker run -d -p 8081:3001 --name origem --network my_network
+//docker run -d -p 8080:3000 --name destino --network my_network pessotticamilly/atividade_tres_servidor_a:1.0.0
+//docker run -d -p 8081:3001 --name origem --network my_network pessotticamilly/atividade_tres_servidor_b:1.0.0

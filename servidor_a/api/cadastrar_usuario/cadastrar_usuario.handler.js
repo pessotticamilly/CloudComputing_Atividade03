@@ -1,14 +1,14 @@
 const crud = require("../../crud/index");
 
-const tabelaUsers = "Users";
+const nomeTabela = "Users";
 
-async function cadastrar(data) {
-    console.log("data: ", data);
-    return await crud.save(tabelaUsers, null, data);
+async function cadastrar(dados) {
+    console.log("dados: ", dados);
+    return await crud.save(nomeTabela, null, dados);
 };
 
 async function retonarListaUsuarios() {
-    return crud.get(tabelaUsers);
+    return crud.get(nomeTabela);
 };
 
 module.exports = {

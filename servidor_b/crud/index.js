@@ -1,5 +1,16 @@
 const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, doc, setDoc, addDoc, query, where, getDocs, getDoc, deleteDoc } = require('firebase/firestore/lite');
+const {
+    getFirestore,
+    collection,
+    doc,
+    setDoc,
+    addDoc,
+    query,
+    where,
+    getDocs,
+    getDoc,
+    deleteDoc
+} = require("firebase/firestore/lite");
 
 const firebaseConfig = {
     apiKey: "AIzaSyCZfylZ6VRE17gNmFybNFyinaDk9hkLxw8",
@@ -11,66 +22,87 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore();
 
-async function save(tableName, id, data) {
+async function save(nomeTabela, id, dado) {
     if (id) {
-        const referenceEntity = await setDoc(doc(db, tableName, id), data);
+        const referencedEntity = await setDoc(doc(db, nomeTabela, id), dado);
         const savedData = {
-            ...data,
-            id: id,
+            ...dado,
+            id: id
         };
         return savedData;
     } else {
-        const referenceEntity = await addDoc(collection(db, tableName), data);
+        const referencedEntity = await addDoc(collection(db, nomeTabela), dado);
         const savedData = {
-            ...data,
-            id: referenceEntity.id,
+            ...dado,
+            id: referencedEntity.id
         };
         return savedData;
     };
 };
 
-async function get(tableName) {
-    const tableRef = collection(db, tableName);
+async function get(nomeTabela) {
+    const tableRef = collection(db, nomeTabela);
+
     const q = query(tableRef);
+
     const querySnapshot = await getDocs(q);
-    const list = [];
+
+    const lista = [];
 
     querySnapshot.forEach((doc) => {
         const data = {
             ...doc.data(),
-            id: doc.id,
+            id: doc.id
         };
-        list.push(data);
+        lista.push(data);
     });
-    return list;
+
+    return lista;
 };
 
-async function getById(tableName, id) {
-    const docRef = doc(db, tableName, id);
+async function getById(nomeTabela, id) {
+    const docRef = doc(db, nomeTabela, id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
         return docSnap.data();
     } else {
-        return {
-            message: `'${id}' not found!`
-        };
+        throw new Error("Not found!");
     };
 };
 
-async function remove(tableName, id) {
-    const data = await deleteDoc(doc(db, tableName, id));
-
+async function remove(nomeTabela, id) {
+    const dado = await deleteDoc(doc(db, nomeTabela, id));
     return {
-        message: `'${id}' removed!`
+        message: `${id} removed!`
     };
+};
+
+async function getWithFilter(nomeTabela, operador, nomeDado, dado) {
+    const tableRef = collection(db, nomeTabela);
+    const q = query(tableRef, where(nomeDado, operador, dado));
+    const data = await getDocs(q)
+
+    const lista = [];
+
+    data.forEach((doc) => {
+        const data = {
+            ...doc.data(),
+            id: doc.id
+        };
+        lista.push(data);
+    });
+
+    return lista;
 };
 
 module.exports = {
     save,
     get,
     getById,
+    getWithFilter,
     remove
 };

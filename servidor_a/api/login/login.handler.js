@@ -1,10 +1,12 @@
-function login(data, listaUsuarios) {
-    console.log("data: ", data);
+function login(dados, listaUsuarios) {
+    console.log("dados: ", dados);
+    
     for (let usuario of listaUsuarios) {
-        if (usuario.name == data.name && usuario.password == data.password) {
+        if (usuario.name == dados.name && usuario.password == dados.password) {
             return true;
         };
     };
+
     return false;
 };
 
